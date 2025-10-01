@@ -229,10 +229,13 @@ const listAppointment = async (req, res) => {
     }
 }
 
-const razorpayInstance = new razorpay({
-    key_id: process.env.RAZORPAY_KEY_ID,
-    key_secret: process.env.RAZORPAY_KEY_SECRET
-})
+let razorpayInstance;
+if (process.env.RAZORPAY_KEY_ID && process.env.RAZORPAY_KEY_SECRET) {
+    razorpayInstance = new razorpay({
+        key_id: process.env.RAZORPAY_KEY_ID,
+        key_secret: process.env.RAZORPAY_KEY_SECRET
+    });
+}
 
 // API to make payment of appointment using razorpay
 const paymentRazorpay = async (req, res) => {
